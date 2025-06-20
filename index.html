@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search for to-let</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentPG - Find Your Perfect Home Away From Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            opacity: 0.8;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .search-section {
+            margin-bottom: 2rem;
+        }
+
+        .search-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input {
+            accent-color: #4f46e5;
+        }
+
+        .range-input {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .range-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .clear-filters {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .clear-filters:hover {
+            background: #dc2626;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        /* Dashboard Home */
+        .dashboard-home {
+            display: block;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .main-search {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .main-search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .main-search-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .quick-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .quick-filter {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .quick-filter:hover, .quick-filter.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .special-offers {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .offers-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .offer-card {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Listings Grid */
+        .listings-section {
+            display: none;
+        }
+
+        .listings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: #374151;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            background: #f3f4f6;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .view-btn.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .listing-content {
+            padding: 1.5rem;
+        }
+
+        .listing-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .listing-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .listing-location {
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .amenity-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .listing-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fbbf24;
+        }
+
+        /* PG Details */
+        .pg-details {
+            display: none;
+        }
+
+        .back-btn {
+            background: #f3f4f6;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .pg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 2rem;
+        }
+
+        .pg-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .pg-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #059669;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #3730a3;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .pg-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 200px 200px;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .gallery-main {
+            grid-row: span 2;
+            background: linear-gradient(45deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #64748b;
+        }
+
+        .gallery-thumb {
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #94a3b8;
+        }
+
+        .pg-info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .info-section {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .map-placeholder {
+            background: #f1f5f9;
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        /* Profile Dashboard */
+        .profile-dashboard {
+            display: none;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .saved-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 250px;
+            }
+
+            .listings-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 300px;
+            }
+        }
+
+        .notification-badge {
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .landlord-dashboard {
+            display: none;
+        }
+
+        .add-listing-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s;
+        }
+
+        .add-listing-btn:hover {
+            background: #059669;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .stat-label {
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                🏠 StudentPG
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item" onclick="showSection('dashboard')">Home</a>
+                <a href="#" class="nav-item" onclick="showSection('listings')">Browse PGs</a>
+                <a href="#" class="nav-item" onclick="showSection('profile')">My Profile</a>
+                <a href="#" class="nav-item" onclick="showSection('landlord')">For Owners</a>
+            </nav>
+            <div class="user-profile">
+                <div style="position: relative;">
+                    <span style="font-size: 1.5rem;">💬</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                <button class="profile-btn">VASU</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="search-section">
+                    <h3 class="search-title">Search & Filters</h3>
+                    <input type="text" class="search-bar" placeholder="Enter college or area name..." id="locationSearch">
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Budget Range</h4>
+                    <input type="range" class="range-input" min="5000" max="25000" value="15000" id="budgetRange">
+                    <div class="range-values">
+                        <span>₹5,000</span>
+                        <span id="budgetDisplay">₹15,000</span>
+                        <span>₹25,000</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Room Type</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-item">
+                            <input type="checkbox" checked> Single Room
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Shared Room
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Triple Sharing
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Meal Options</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-item">
+                            <input type="checkbox" checked> With Food
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Without Food
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Kitchen Access
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">PG Type</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Boys Only
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" checked> Girls Only
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Co-ed
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Amenities</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-item">
+                            <input type="checkbox" checked> Wi-Fi
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Laundry
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Study Room
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> AC Rooms
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox"> Parking
+                        </label>
+                    </div>
+                </div>
+
+                <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content-area">
+                <!-- Dashboard Home -->
+                <section id="dashboard" class="dashboard-home">
+                    <div class="hero-section">
+                        <h1 class="hero-title">Find Your Perfect PG</h1>
+                        <p class="hero-subtitle">Discover comfortable, affordable accommodations near your college</p>
+
+                        <div class="main-search">
+                            <input type="text" class="main-search-input" placeholder="Search by college name, area, or landmark..." onkeyup="handleMainSearch(event)">
+                        </div>
+
+                        <div class="quick-filters">
+                            <div class="quick-filter active" onclick="toggleQuickFilter(this, 'budget')">Budget Friendly</div>
+                            <div class="quick-filter" onclick="toggleQuickFilter(this, 'food')">With Food</div>
+                            <div class="quick-filter" onclick="toggleQuickFilter(this, 'single')">Single Rooms</div>
+                            <div class="quick-filter" onclick="toggleQuickFilter(this, 'wifi')">Wi-Fi Included</div>
+                            <div class="quick-filter" onclick="toggleQuickFilter(this, 'girls')">Girls Only</div>
+                        </div>
+                    </div>
+
+                    <div class="special-offers">
+                        <h2 class="offers-title">🎉 Special Student Offers</h2>
+                        <div class="offers-grid">
+                            <div class="offer-card">
+                                <h3>Near IIT Delhi</h3>
+                                <p>20% off first month for new students</p>
+                            </div>
+                            <div class="offer-card">
+                                <h3>DU North Campus</h3>
+                                <p>Free Wi-Fi + Study Room Access</p>
+                            </div>
+                            <div class="offer-card">
+                                <h3>JNU Area</h3>
+                                <p>No security deposit this month</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Listings Section -->
+                <section id="listings" class="listings-section">
+                    <div class="listings-header">
+                        <div class="results-count">
+                            <strong>248 PGs found</strong> near your search location
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active">📋</button>
+                            <button class="view-btn">📍</button>
+                        </div>
+                    </div>
+
+                    <div class="listings-grid" id="listingsGrid">
+                        <!-- Listing cards will be generated here -->
+                    </div>
+                </section>
+
+                <!-- PG Details -->
+                <section id="pgDetails" class="pg-details">
+                    <button class="back-btn" onclick="showSection('listings')">
+                        ← Back to Listings
+                    </button>
+
+                    <div class="pg-header">
+                        <div>
+                            <h1 class="pg-title">Sunshine Girls PG</h1>
+                            <div class="listing-location">
+                                📍 500m from Delhi University, North Campus
+                            </div>
+                            <div class="listing-rating">
+                                ⭐⭐⭐⭐⭐ 4.8 (127 reviews)
+                            </div>
+                        </div>
+                        <div>
+                            <div class="pg-price">₹12,000/month</div>
+                            <div class="action-buttons">
+                                <button class="btn-primary">Contact Owner</button>
+                                <button class="btn-secondary">💾 Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pg-gallery">
+                        <div class="gallery-main">🏠</div>
+                        <div class="gallery-thumb">🛏️</div>
+                        <div class="gallery-thumb">🍽️</div>
+                        <div class="gallery-thumb">📚</div>
+                        <div class="gallery-thumb">🚿</div>
+                    </div>
+
+                    <div class="pg-info-grid">
+                        <div>
+                            <div class="info-section">
+                                <h3 class="info-title">Room Details</h3>
+                                <ul class="info-list">
+                                    <li><span>Room Type</span><span>Single Occupancy</span></li>
+                                    <li><span>Furnishing</span><span>Fully Furnished</span></li>
+                                    <li><span>Food Included</span><span>Yes (3 meals)</span></li>
+                                    <li><span>Security Deposit</span><span>₹15,000</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="info-section">
+                                <h3 class="info-title">Amenities</h3>
+                                <div class="amenities">
+                                    <span class="amenity-tag">📶 Wi-Fi</span>
+                                    <span class="amenity-tag">🧺 Laundry</span>
+                                    <span class="amenity-tag">📚 Study Room</span>
+                                    <span class="amenity-tag">❄️ AC Rooms</span>
+                                    <span class="amenity-tag">🚗 Parking</span>
+                                    <span class="amenity-tag">🔒 Security</span>
+                                    <span class="amenity-tag">🧹 Housekeeping</span>
+                                    <span class="amenity-tag">📺 Common TV</span>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3 class="info-title">House Rules</h3>
+                                <ul class="info-list">
+                                    <li>No smoking or drinking</li>
+                                    <li>Entry timing: 6 AM - 10 PM</li>
+                                    <li>Visitors allowed till 8 PM</li>
+                                    <li>Monthly room cleaning mandatory</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="info-section">
+                                <h3 class="info-title">Location</h3>
+                                <div class="map-placeholder">
+                                    🗺️ Interactive Map View
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h3 class="info-title">Nearby</h3>
+                                <ul class="info-list">
+                                    <li><span>Delhi University</span><span>500m</span></li>
+                                    <li><span>Metro Station</span><span>800m</span></li>
+                                    <li><span>Hospital</span><span>1.2 km</span></li>
+                                    <li><span>Market</span><span>300m</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Dashboard -->
+                <section id="profile" class="profile-dashboard">
+                    <h1 style="margin-bottom: 2rem;">My Dashboard</h1>
+
+                    <div class="dashboard-tabs">
+                        <button class="tab-btn active" onclick="showTab('saved')">Saved PGs</button>
+                        <button class="tab-btn" onclick="showTab('bookings')">My Bookings</button>
+                        <button class="tab-btn" onclick="showTab('profile')">Profile Settings</button>
+                    </div>
+
+                    <div id="saved" class="tab-content active">
+                        <h2>Saved PGs</h2>
+                        <div class="saved-listings">
+                            <!-- Saved listings will appear here -->
+                        </div>
+                    </div>
+
+                    <div id="bookings" class="tab-content">
+                        <h2>My Bookings</h2>
+                        <!-- Booking history will appear here -->
+                    </div>
+
+                    <div id="profile" class="tab-content">
+                        <h2>Profile Settings</h2>
+                        <!-- Profile settings form will appear here -->
+                    </div>
+                </section>
+
+                <!-- Landlord Dashboard -->
+                <section id="landlord" class="landlord-dashboard">
+                    <h1 style="margin-bottom: 2rem;">Owner Dashboard</h1>
+
+                    <button class="add-listing-btn">+ Add New PG Listing</button>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Active Listings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Total Bookings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Available Rooms</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">₹3,20,000</div>
+                            <div class="stat-label">Monthly Revenue</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-tabs">
+                        <button class="tab-btn active" onclick="showLandlordTab('listings')">My Listings</button>
+                        <button class="tab-btn" onclick="showLandlordTab('bookings')">Booking Requests</button>
+                        <button class="tab-btn" onclick="showLandlordTab('tenants')">Current Tenants</button>
+                        <button class="tab-btn" onclick="showLandlordTab('payments')">Payments</button>
+                    </div>
+
+                    <div id="landlord-listings" class="tab-content active">
+                        <h2>My PG Listings</h2>
+                        <!-- Landlord's listings will appear here -->
+                    </div>
+
+                    <div id="landlord-bookings" class="tab-content">
+                        <h2>Booking Requests</h2>
+                        <!-- Booking requests will appear here -->
+                    </div>
+
+                    <div id="landlord-tenants" class="tab-content">
+                        <h2>Current Tenants</h2>
+                        <!-- Current tenants list will appear here -->
+                    </div>
+
+                    <div id="landlord-payments" class="tab-content">
+                        <h2>Payment History</h2>
+                        <!-- Payment history will appear here -->
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Show the selected section and hide others
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-area > section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Toggle quick filters
+        function toggleQuickFilter(element, filterType) {
+            const filters = document.querySelectorAll('.quick-filter');
+            filters.forEach(filter => {
+                filter.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Handle main search input
+        function handleMainSearch(event) {
+            if (event.key === 'Enter') {
+                showSection('listings');
+                // In a real app, you would filter listings based on the search query
+                const searchQuery = event.target.value;
+                console.log('Searching for:', searchQuery);
+            }
+        }
+
+        // Update budget display
+        const budgetRange = document.getElementById('budgetRange');
+        const budgetDisplay = document.getElementById('budgetDisplay');
+
+        budgetRange.addEventListener('input', function() {
+            budgetDisplay.textContent = '₹' + this.value;
+        });
+
+        // Clear all filters
+        function clearAllFilters() {
+            document.getElementById('locationSearch').value = '';
+            document.getElementById('budgetRange').value = 15000;
+            budgetDisplay.textContent = '₹15,000';
+
+            const checkboxes = document.querySelectorAll('.checkbox-item input');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Check the default options
+            document.querySelector('.filter-options input[value="Single Room"]').checked = true;
+            document.querySelector('.filter-options input[value="With Food"]').checked = true;
+            document.querySelector('.filter-options input[value="Girls Only"]').checked = true;
+            document.querySelector('.filter-options input[value="Wi-Fi"]').checked = true;
+        }
+
+        // Show the selected tab in profile dashboard
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Show the selected tab in landlord dashboard
+        function showLandlordTab(tabId) {
+            const prefix = 'landlord-';
+            const tabs = document.querySelectorAll('#landlord .tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(prefix + tabId).classList.add('active');
+
+            const tabButtons = document.querySelectorAll('#landlord .tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Generate sample listing cards
+        function generateListingCards() {
+            const listingsGrid = document.getElementById('listingsGrid');
+            const sampleListings = [
+                {
+                    title: "Sunshine Girls PG",
+                    location: "500m from Delhi University",
+                    price: "₹12,000",
+                    rating: "⭐⭐⭐⭐⭐ 4.8",
+                    amenities: ["Wi-Fi", "Laundry", "Study Room", "AC Rooms"]
+                },
+                {
+                    title: "Comfort Boys Hostel",
+                    location: "Near IIT Delhi",
+                    price: "₹10,500",
+                    rating: "⭐⭐⭐⭐☆ 4.2",
+                    amenities: ["Wi-Fi", "Parking", "Kitchen Access"]
+                },
+                {
+                    title: "Safe Haven PG",
+                    location: "JNU Area",
+                    price: "₹11,800",
+                    rating: "⭐⭐⭐⭐☆ 4.5",
+                    amenities: ["Wi-Fi", "Laundry", "Study Room", "Parking"]
+                },
+                {
+                    title: "Home Away PG",
+                    location: "DU North Campus",
+                    price: "₹13,200",
+                    rating: "⭐⭐⭐⭐☆ 4.3",
+                    amenities: ["Wi-Fi", "Laundry", "AC Rooms", "Security"]
+                },
+                {
+                    title: "Student Nest",
+                    location: "Near Jamia Millia Islamia",
+                    price: "₹9,500",
+                    rating: "⭐⭐⭐⭐☆ 4.1",
+                    amenities: ["Wi-Fi", "Kitchen Access", "Study Room"]
+                },
+                {
+                    title: "Peaceful Abode",
+                    location: "South Campus, DU",
+                    price: "₹14,000",
+                    rating: "⭐⭐⭐⭐⭐ 4.7",
+                    amenities: ["Wi-Fi", "Laundry", "AC Rooms", "Parking", "Security"]
+                }
+            ];
+
+            listingsGrid.innerHTML = sampleListings.map(listing => `
+                <div class="listing-card" onclick="showSection('pgDetails')">
+                    <div class="listing-image">
+                        🏠
+                        <button class="favorite-btn">❤️</button>
+                    </div>
+                    <div class="listing-content">
+                        <div class="listing-price">${listing.price}/month</div>
+                        <div class="listing-title">${listing.title}</div>
+                        <div class="listing-location">📍 ${listing.location}</div>
+                        <div class="amenities">
+                            ${listing.amenities.map(amenity => `<span class="amenity-tag">${amenity}</span>`).join('')}
+                        </div>
+                        <div class="listing-rating">${listing.rating}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateListingCards();
+        });
+    </script>
+</body>
+</html>
+
+</body>
+</html>
